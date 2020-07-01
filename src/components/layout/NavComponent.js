@@ -1,24 +1,42 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, withRouter,Redirect } from "react-router-dom";
+var greeting;
+
+
+async function hello() {
+    localStorage.setItem("isLoggedin" ,'false');
+    return greeting = await Promise.resolve(
+        window.location.replace('http://localhost:3000/login')
+    );
+  };
+
 
 class NavbarComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             countries: [],
-            isLoggedIn: localStorage.getItem("isLoggedIn")
+            isLoggedin: localStorage.getItem("isLoggedin")
         };
         this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleLogout(e){
-        this.setState({isLoggedIn:!this.state.isLoggedIn});
-        localStorage.removeItem('isLoggedIn');
-        this.props.history.push('/login');
+    handleLogout(e) {
+        hello();
+        // localStorage.setItem("isLoggedin" ,'false');
+        // this.props.history.push('/login');
     }
 
+    componentWillMount(){
+        this.setState({
+            isLoggedin : localStorage.getItem("isLoggedin")
+        })
+    }
+    
+
     render() {
-        const isLoggedIn  = this.state.isLoggedIn;
+        const isLoggedIn = this.state.isLoggedIn;
+        console.log(this.props);
         return (
             <nav className="navbar navbar-expand-md navbar-default fixed-top bg-dark">
                 <div className="container-fluid">
@@ -54,7 +72,7 @@ class NavbarComponent extends Component {
                             <li>
                                 <Link to="/news">News</Link>
                             </li>
-                             <li>
+                            <li>
                                 <Link to="/book">Book</Link>
                             </li>
                             <li className="dropdown">
@@ -91,11 +109,13 @@ class NavbarComponent extends Component {
                                 </ul>
                             </li>
                         </ul>
-                        <ul className="nav navbar-nav navbar-right">
-                            <li className="active">
-                                {isLoggedIn?<button className="btn btn-danger" onClick={this.handleLogout}>Logout</button>:<Link to="/login">Login</Link>}
-                            </li>
-                        </ul>
+                        {window.location.pathname !== '/login' ?
+                            <ul className="nav navbar-nav navbar-right">
+                                <li className="active">
+        { localStorage.getItem('isLoggedin') == 'true' ? <button className="btn btn-danger" onClick={this.handleLogout}>Logout</button> : <Link to="/login">Login</Link>}
+                                </li>
+                            </ul> :
+                             null}
                     </div>
                 </div>
             </nav>
@@ -103,4 +123,4 @@ class NavbarComponent extends Component {
     }
 }
 
-export default NavbarComponent;
+export default withRouter(NavbarComponent);

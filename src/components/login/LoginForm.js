@@ -7,24 +7,22 @@ class LoginFormComponent extends Component {
         this.state = {
             email: '1234567890',
             password: '123456',
-            isLoggedIn:false
+            isLoggedIn: false
         };
-         this.handleChange = this.handleChange.bind(this);
-         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        var data ={
+        var data = {
             'email': this.state.email,
             'password': this.state.password
         };
-        axios
-        .post('http://demo.myvehicle.biz/api/login',data)
-        .then(
+        axios.post('http://myvehicle.mohan.work/api/login', data).then(
             (res) => {
                 localStorage.setItem("user_token", res.data.data['token']);
-                localStorage.setItem("isLoggedIn", !this.state.isLoggedIn);
+                localStorage.setItem("isLoggedin", true);
                 this.props.history.push('/country');
             },
             (error) => {
@@ -36,15 +34,15 @@ class LoginFormComponent extends Component {
     //     this.setState({ [propertyName]: evt.target.value });
     // }
     handleChange(event) {
-       this.setState({ [event.target.name]: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     render() {
-         const { email, password } = this.state;
+        const { email, password } = this.state;
         return (
             <div>
                 <div className="row">
-                    <div className="col-sm-2"></div>   
+                    <div className="col-sm-2"></div>
                     <div className="col-sm-8">
                         <div className="panel panel-default">
                             <div className="panel-heading">Login</div>
@@ -87,10 +85,10 @@ class LoginFormComponent extends Component {
                                 </form>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                     <div class="col-sm-2"></div>
                 </div>
-               
+
             </div>
         );
     }

@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Router,Route,Switch,withRouter } from "react-router-dom";
 import React, { Component } from "react";
 import PostOfficeComponent from "./components/postoffice/PostofficeComponent.js";
 import CountryComponent from "./components/country/CountryComponent.js";
@@ -7,13 +7,14 @@ import NewsListComponent from "./components/news/NewsList.js";
 import BookCategoryList from "./components/book/BookCategoryList.js";
 import Index from "./components/index.js";
 import LoginFormComponent from './components/login/LoginForm.js'
+import NavbarComponent from "./components/layout/NavComponent.js";
 
 
 class Routers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: localStorage.getItem("isLoggedIn")
+           
         };
     }
 
@@ -29,9 +30,10 @@ class Routers extends Component {
     // };
 
     render() {
-        const isLoggedIn  = this.state.isLoggedIn;
+        console.log(this.props);
         return (
-            <React.Fragment>
+            
+                <Switch>
              <Route
                     path="/"
                     exact
@@ -44,7 +46,6 @@ class Routers extends Component {
                 ></Route>
                 <Route 
                     path="/country" 
-                    exact 
                     component={CountryComponent}
                 ></Route>
                 <Route
@@ -70,10 +71,10 @@ class Routers extends Component {
                 <Route
                     path="/login"
                     exact
-                    component={LoginFormComponent}
-                isLoggedIn={isLoggedIn}></Route>
-            </React.Fragment>
+                    component={LoginFormComponent}></Route>
+                </Switch>
+           
         );
     }
 }
-export default Routers;
+export default withRouter(Routers);

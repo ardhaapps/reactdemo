@@ -9,7 +9,7 @@ class CountryComponent extends Component {
             countries: [],
             isLoggedIn: localStorage.getItem("isLoggedIn")
         };
-        if(!this.state.isLoggedIn){
+        if(localStorage.getItem("isLoggedin")!=='true'){
             this.props.history.push('/login');
         }
     }
