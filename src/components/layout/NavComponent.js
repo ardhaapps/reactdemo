@@ -59,7 +59,7 @@ class NavbarComponent extends Component {
                         </Link>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">
-                        <ul className="nav navbar-nav">
+                        <ul className="nav navbar-nav" style={{cursor:'pointer'}}>
                             <li>
                                 <NavLink to="/">Home</NavLink>
                             </li>
