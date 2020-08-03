@@ -8,7 +8,8 @@ import BookCategoryList from "./components/book/BookCategoryList.js";
 import Index from "./components/index.js";
 import LoginFormComponent from './components/login/LoginForm.js'
 import NavbarComponent from "./components/layout/NavComponent.js";
-
+import DailyInformation from './components/daily-information/DailyInformation.js'
+import TechNews from './components/technews/TechNews.js'
 
 class Routers extends Component {
     constructor(props) {
@@ -72,6 +73,12 @@ class Routers extends Component {
                     path="/login"
                     exact
                     component={LoginFormComponent}></Route>
+                <Route
+                    path="/daily-information"
+                    exact
+                    component={DailyInformation}
+                ></Route>
+                <Route path="/tech-news" component={TechNews}></Route>
                 </Switch>
            
         );

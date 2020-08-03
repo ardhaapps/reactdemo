@@ -36,7 +36,7 @@ class NavbarComponent extends Component {
 
     render() {
         const isLoggedIn = this.state.isLoggedIn;
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <nav className="navbar navbar-expand-md navbar-default fixed-top bg-dark">
                 <div className="container-fluid">
@@ -74,6 +74,12 @@ class NavbarComponent extends Component {
                             </li>
                             <li>
                                 <Link to="/book">Book</Link>
+                            </li>
+                            <li>
+                                <Link to="/daily-information">Daily Information</Link>
+                            </li>
+                            <li>
+                                <Link to="/tech-news">Tech News</Link>
                             </li>
                             <li className="dropdown">
                                 <a
